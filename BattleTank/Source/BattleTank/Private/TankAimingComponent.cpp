@@ -6,6 +6,7 @@
 #include "TankBarrel.h"
 #include "TankTurret.h"
 
+
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
@@ -18,11 +19,13 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
+  if (BarrelToSet == nullptr) { return; }
   Barrel = BarrelToSet;
 }
 
 void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
 {
+  if (TurretToSet == nullptr) { return; }
   Turret = TurretToSet;
 }
 
@@ -30,13 +33,6 @@ void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
 void UTankAimingComponent::BeginPlay()
 {
 	Super::BeginPlay();
-}
-
-
-// Called every frame
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float ProjectileLaunchSpeed)
