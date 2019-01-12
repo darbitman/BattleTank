@@ -8,6 +8,9 @@
 // Sets default values
 ATank::ATank()
 {
+  // Initialize LastFireTime to the moment the tank is created
+  LastFireTime = FPlatformTime::Seconds();
+
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
@@ -26,7 +29,6 @@ void ATank::BeginPlay()
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
