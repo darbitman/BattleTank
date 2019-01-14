@@ -28,6 +28,9 @@ protected:
   UPROPERTY(BlueprintReadOnly)
   UTankAimingComponent* TankAimingComponent = nullptr;
 
+  // Called when the game starts
+  virtual void BeginPlay() override;
+
 private:
 	// Sets default values for this pawn's properties
 	ATank();
