@@ -32,7 +32,7 @@ public:
   UFUNCTION(BlueprintCallable, Category = "Setup")
   void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
-  void AimAt(FVector HitLocation, float ProjectileLaunchSpeed);
+  void AimAt(FVector HitLocation);
 
 protected:
   // Called when the game starts
@@ -47,4 +47,7 @@ private:
   UTankBarrel* Barrel = nullptr;
 
   UTankTurret* Turret = nullptr;
+
+  UPROPERTY(EditDefaultsOnly, Category = "Firing")
+  float ProjectileLaunchSpeed = 4000.0f;
 };
