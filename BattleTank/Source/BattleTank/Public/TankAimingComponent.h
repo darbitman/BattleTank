@@ -36,15 +36,17 @@ public:
   void Fire();
 
 protected:
-  // Called when the game starts
-  virtual void BeginPlay() override;
-
   UPROPERTY(BlueprintReadOnly, Category = "State")
   EFiringState FiringState = EFiringState::Reloading;
 
 private:
   // Sets default values for this component's properties
   UTankAimingComponent();
+
+  // Called when the game starts
+  virtual void BeginPlay() override;
+
+  virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
   void MoveBarrelTowards(FVector AimDirection);
 
