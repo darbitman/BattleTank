@@ -48,7 +48,9 @@ private:
 
   virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
-  void MoveBarrelTowards(FVector AimDirection);
+  void MoveBarrelTowards();
+
+  bool IsBarrelMoving() const;
 
   UTankBarrel* Barrel = nullptr;
 
@@ -64,4 +66,6 @@ private:
   float ReloadTimeInSeconds = 3.0f;
 
   double LastFireTime = 0.0;
+
+  FVector AimDirection;
 };
