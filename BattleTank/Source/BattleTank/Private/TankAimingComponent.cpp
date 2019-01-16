@@ -3,11 +3,15 @@
 #include "Engine/Classes/Kismet/GameplayStatics.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
+  // Initialize LastFireTime to the moment the tank is created
+  LastFireTime = FPlatformTime::Seconds();
+
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;  // TODO should this tick
@@ -49,6 +53,23 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
   {
     auto AimDirection = OutProjectileLaunchVelocity.GetSafeNormal();
     MoveBarrelTowards(AimDirection);
+  }
+}
+
+void UTankAimingComponent::Fire()
+{
+  if (!ensure(Barrel && ProjectileBlueprint)) { return; }
+  bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+  if (bIsReloaded)
+  {
+    // Spawn a projectile at the socket location on the barrel
+    auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+      ProjectileBlueprint,
+      Barrel->GetSocketLocation(FName("Projectile")),
+      Barrel->GetSocketRotation(FName("Projectile"))
+      );
+    Projectile->LaunchProjectile(ProjectileLaunchSpeed);
+    LastFireTime = FPlatformTime::Seconds();
   }
 }
 
