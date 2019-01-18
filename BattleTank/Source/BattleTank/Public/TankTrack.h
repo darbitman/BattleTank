@@ -26,5 +26,10 @@ public:
 private:
   UTankTrack();
 
+  virtual void BeginPlay() override;
+
   virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+  UFUNCTION()
+  void OnHit(UPrimitiveComponent* FComponentHitSignature, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };
