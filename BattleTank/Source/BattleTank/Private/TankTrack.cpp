@@ -15,7 +15,7 @@ void UTankTrack::BeginPlay()
 
 void UTankTrack::OnHit(UPrimitiveComponent* FComponentHitSignature, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
-  // Drive the tracks
+  DriveTrack();
   ApplySidewaysForce();
   CurrentThrottle = 0.0f;
 }
@@ -41,8 +41,7 @@ void UTankTrack::ApplySidewaysForce()
 
 void UTankTrack::SetThrottle(float Throttle)
 {
-  CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1.0f, 1.0f);
-  DriveTrack();
+  CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
 }
 
 void UTankTrack::DriveTrack()

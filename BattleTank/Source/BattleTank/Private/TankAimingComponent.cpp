@@ -99,13 +99,20 @@ void UTankAimingComponent::MoveBarrelTowards()
   auto DeltaRotator = AimAsRotator - BarrelRotator;
 
   Barrel->Elevate(DeltaRotator.Pitch);
-
-  Turret->Rotate(DeltaRotator.Yaw);
+  if (FMath::Abs(DeltaRotator.Yaw) < 180)
+  {
+    Turret->Rotate(DeltaRotator.Yaw);
+  }
+  else
+  {
+    Turret->Rotate(-DeltaRotator.Yaw);
+  }
+  
 }
 
 bool UTankAimingComponent::IsBarrelMoving() const
 {
   if (!ensure(Barrel)) { return false; }
   auto BarrelForwardVector = Barrel->GetForwardVector().GetSafeNormal();
-  return !BarrelForwardVector.Equals(AimDirection, 0.0005);
+  return !BarrelForwardVector.Equals(AimDirection, 0.005);
 }
