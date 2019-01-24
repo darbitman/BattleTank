@@ -7,17 +7,17 @@
 #include "TankTurret.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS(meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankTurret : public UStaticMeshComponent
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 public:
-  // -1.0 is max left pitch speed, +1.0 is max right pitch speed
-  void Rotate(float RelativeSpeed);
-	
+    // -1.0 is max left pitch speed, +1.0 is max right pitch speed
+    void Rotate(float RelativeSpeed);
+
 private:
-  UPROPERTY(EditDefaultsOnly, Category = "Setup")
-  float MaxDegreesPerSecond = 30.0f;
+    UPROPERTY(EditDefaultsOnly, Category = "Setup")
+    float MaxDegreesPerSecond = 30.0f;
 };

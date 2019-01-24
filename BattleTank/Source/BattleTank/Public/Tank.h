@@ -9,8 +9,8 @@
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 private:
-	// Sets default values for this pawn's properties
-	ATank();
+    // Sets default values for this pawn's properties
+    ATank();
 };

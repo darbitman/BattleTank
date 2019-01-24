@@ -7,11 +7,11 @@
 #include "BattleTankGameModeBase.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class BATTLETANK_API ABattleTankGameModeBase : public AGameModeBase
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
+
 };

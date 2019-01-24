@@ -7,27 +7,27 @@
 
 void ATankAIController::BeginPlay()
 {
-  Super::BeginPlay();
+    Super::BeginPlay();
 }
 
 void ATankAIController::Tick(float DeltaTime)
 {
-  Super::Tick(DeltaTime);
+    Super::Tick(DeltaTime);
 
-  auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
-  auto ControlledTank = GetPawn();
-  auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
+    auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+    auto ControlledTank = GetPawn();
+    auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 
-  if (!ensure(PlayerTank && ControlledTank && AimingComponent)) { return; }
+    if (!ensure(PlayerTank && ControlledTank && AimingComponent)) { return; }
 
-  // Move towards the player
-  MoveToActor(PlayerTank, AcceptanceRadius);  // TODO check radius units
+    // Move towards the player
+    MoveToActor(PlayerTank, AcceptanceRadius);  // TODO check radius units
 
-  // aim towards the player
-  AimingComponent->AimAt(PlayerTank->GetActorLocation());
+    // aim towards the player
+    AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
-  if (AimingComponent->GetFireingState() == EFiringState::Locked)
-  {
-    AimingComponent->Fire();  // TODO limit firing rate
-  }
+    if (AimingComponent->GetFireingState() == EFiringState::Locked)
+    {
+        AimingComponent->Fire();  // TODO limit firing rate
+    }
 }

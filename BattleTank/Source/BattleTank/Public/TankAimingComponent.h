@@ -11,10 +11,10 @@
 UENUM()
 enum class EFiringState : uint8
 {
-  Reloading,
-  Aiming,
-  Locked,
-  OutOfAmmo
+    Reloading,
+    Aiming,
+    Locked,
+    OutOfAmmo
 };
 
 // Forward Declarations
@@ -25,55 +25,58 @@ class AProjectile;
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
-  GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
-  UFUNCTION(BlueprintCallable, Category = "Setup")
-  void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+    UFUNCTION(BlueprintCallable, Category = "Setup")
+    void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
-  void AimAt(FVector HitLocation);
+    void AimAt(FVector HitLocation);
 
-  UFUNCTION(BlueprintCallable, Category = "Firing")
-  void Fire();
+    UFUNCTION(BlueprintCallable, Category = "Firing")
+    void Fire();
 
-  EFiringState GetFireingState() const;
+    EFiringState GetFireingState() const;
 
-  UFUNCTION(BlueprintCallable, Category = "Firing")
-  int GetRoundsLeft() const;
+    UFUNCTION(BlueprintCallable, Category = "Firing")
+    int32 GetRoundsLeft() const;
 
 protected:
-  UPROPERTY(BlueprintReadOnly, Category = "State")
-  EFiringState FiringState = EFiringState::Reloading;
+    UPROPERTY(BlueprintReadOnly, Category = "State")
+    EFiringState FiringState = EFiringState::Reloading;
 
 private:
-  // Sets default values for this component's properties
-  UTankAimingComponent();
+    // Sets default values for this component's properties
+    UTankAimingComponent();
 
-  // Called when the game starts
-  virtual void BeginPlay() override;
+    // Called when the game starts
+    virtual void BeginPlay() override;
 
-  virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+    virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
-  void MoveBarrelTowards();
+    void MoveBarrelTowards();
 
-  bool IsBarrelMoving() const;
+    bool IsBarrelMoving() const;
 
-  UTankBarrel* Barrel = nullptr;
+    UTankBarrel* Barrel = nullptr;
 
-  UTankTurret* Turret = nullptr;
+    UTankTurret* Turret = nullptr;
 
-  UPROPERTY(EditDefaultsOnly, Category = "Setup")
-  TSubclassOf<AProjectile> ProjectileBlueprint;
+    UPROPERTY(EditDefaultsOnly, Category = "Setup")
+    TSubclassOf<AProjectile> ProjectileBlueprint;
 
-  UPROPERTY(EditDefaultsOnly, Category = "Firing")
-  float ProjectileLaunchSpeed = 4000.0f;
+    UPROPERTY(EditDefaultsOnly, Category = "Firing")
+    float ProjectileLaunchSpeed = 4000.0f;
 
-  UPROPERTY(EditDefaultsOnly, Category = "Firing")
-  float ReloadTimeInSeconds = 3.0f;
+    UPROPERTY(EditDefaultsOnly, Category = "Firing")
+    float ReloadTimeInSeconds = 3.0f;
 
-  double LastFireTime = 0.0;
+    UPROPERTY(EditDefaultsOnly, Category = "Firing")
+    int32 RoundsLeft = 3;
 
-  FVector AimDirection;
+    double LastFireTime = 0.0;
 
-  int RoundsLeft = 3;
+    FVector AimDirection;
+
+
 };
