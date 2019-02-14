@@ -10,7 +10,20 @@ UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
     GENERATED_BODY()
-private:
+public:
+    // Called by the engine when actor damage is dealt
+    virtual float TakeDamage(float DamageAmount,
+                             FDamageEvent const& DamageEvent,
+                             AController* EventInstigator,
+                             AActor* DamageCauser) override;
+
     // Sets default values for this pawn's properties
     ATank();
+
+private:
+    UPROPERTY(EditDefaultsOnly, Category = "Setup")
+    int32 StartingHealth = 100;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Setup")
+    int32 CurrentHealth = StartingHealth;
 };
